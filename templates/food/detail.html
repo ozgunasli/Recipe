@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+
+{% block body %}
+
+
+    <h1>{{ recipe.name}}</h1><br>
+    {% if recipe.image %}
+        <img src="{{recipe.image.url}}" class="img-responsive">
+    {% endif %}
+    <h1>Usta:{{recipe.user.username}}</h1><br>
+    Description:{{ recipe.description}}<br>
+    {{ recipe.difficulty }}<br>
+
+    {{ total_likes }} Like
+
+    <form action="{% url 'like_recipe' %}" method="post">
+        {% csrf_token %}
+        {% if is_liked %}
+        <button type="submit" name="recipe_id" value="{{recipe.id}}" class="btn btn-primary"> Dislike </button>
+        {% else %}
+        <button type="submit" name="recipe_id" value="{{recipe.id}}" class="btn btn-primary"> Like </button>
+        {% endif %}
+    </form>
+{% endblock %}
+
+

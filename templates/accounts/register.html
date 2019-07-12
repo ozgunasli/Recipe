@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% load crispy_forms_tags %}
+    <form method="POST" enctype="multipart/form-data">
+        <h1>Giriş Sayfası</h1>
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" value="Giriş Yap">
+    </form>
+
+</body>
+</html>

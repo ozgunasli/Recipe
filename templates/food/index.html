@@ -1,0 +1,58 @@
+{% extends 'base.html'%}
+
+{% block body %}
+
+   <div class="container" style="margin-top:20px;">
+  <div class="row">
+    <div class="col-sm-8">
+        {% for recipe in recipes %}
+        <div class="com-md-12 border mb-4 p-4">
+            <h2><a href="{{recipe.get_absolute_url}}">{{recipe.name}}</a></h2>
+        {% if recipe.image %}
+          <img src="{{recipe.image.url}}" class="img-responsive">
+        {% endif %}
+            <p class="mt-3">{{ recipe.description }}</p>
+            {% for ingredients in recipe.ingredients.all %}
+                {{ingredients }}<br>
+            {% endfor %}
+            <h6 style="font-size:14px;">{{ recipe.publishing_date}}  ·  {{ recipe.total_likes }} Like ·  by {{ recipe.user.get_full_name}}
+                <h6/>
+        {% if request.user.username == recipe.user.username %}
+               <a href="{{recipe.get_update_url}}">edit</a>
+        {% endif %}
+        </div>
+        {% endfor %}
+        <div class="pagination d-flex justify-content-center mt-4 mb-4">
+            <span class="step-links">
+                {% if recipes.has_previous %}
+                <a href="?sayfa={{ recipes.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"><button type="button" class="btn btn-outline-secondary">Previous</button></a>
+                {% endif %}
+                <span class="current">
+                    Page {{ recipes.number }} of {{ recipes.paginator.num_pages }}.
+                </span>
+                {% if recipes.has_next %}
+                    <a href="?sayfa={{ recipes.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"><button type="button" class="btn btn-outline-secondary">Next</button></a>
+                {% endif %}
+            </span>
+    </div>
+  </div>
+    <div class="col-sm-4">
+        <div class="col-md-12 border p-2 mb-4 pt-4 pb-4" style="border-radius:12px">
+            <form class="form-inline" role="search" method="get"action="">
+              <h1>Search</h1>
+              <input class="form-control mr-sm-2" type="search" name="q" placeholder="ingredinet" aria-label="Search">
+              <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div class="col-md-12 border p-2 pt-4 pb-4" style="border-radius:12px">
+            <h2>Top Used Ingredients</h2>
+            <ul>
+              <li><a href="#">Tomato</a></li>
+              <li><a href="#">Union</a></li>
+            </ul>
+        </div>
+    </div>
+  </div>
+
+{% endblock %}
