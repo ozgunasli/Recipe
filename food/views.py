@@ -77,3 +77,7 @@ def update_view(request,slug):
         'form': form,
     }
     return render(request, 'food/form.html', context)
+
+def ingredient_view(request,id):
+    f=Recipe.objects.filter(ingredients=id)
+    return render(request,'food/ingredient.html',{'f':f})

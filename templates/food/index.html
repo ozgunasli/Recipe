@@ -48,8 +48,12 @@
         <div class="col-md-12 border p-2 pt-4 pb-4" style="border-radius:12px">
             <h2>Top Used Ingredients</h2>
             <ul>
-              <li><a href="#">Tomato</a></li>
-              <li><a href="#">Union</a></li>
+               {% for recipe in recipes %}
+                    {% for ingredients in recipe.ingredients.all %}
+                        <li><a href="{% url 'ingredient' ingredients.id %}">Tomato</a></li>
+                        <li><a href="#">Union</a></li>
+                    {% endfor %}
+               {% endfor %}
             </ul>
         </div>
     </div>

@@ -39,6 +39,9 @@ class Recipe(models.Model):
     def get_update_url(self):
         return reverse('update', kwargs={'slug': self.slug})
 
+    def get_ingredient_url(self):
+        return reverse('ingredient', kwargs={'id': self.id})
+
     class Meta:
         ordering=['-publishing_date']
 
