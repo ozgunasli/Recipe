@@ -50,7 +50,7 @@
             <ul>
                {% for recipe in recipes %}
                     {% for ingredients in recipe.ingredients.all %}
-                        <li><a href="{% url 'ingredient' ingredients.id %}">Tomato</a></li>
+                        <li><a href="{% url 'ingredient' id=ingredients.id %}">Tomato</a></li>
                         <li><a href="#">Union</a></li>
                     {% endfor %}
                {% endfor %}
